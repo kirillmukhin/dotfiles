@@ -72,12 +72,12 @@ zplug "zsh-users/zsh-history-substring-search"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 #
-# Auto-remove files for all commented-out/removed packages from above
-zplug clean --force
 # Auto-install packages if there are plugins that have not been installed
 if ! zplug check; then
-    zplug install
+  zplug install
 fi
+# Auto-remove files for all commented-out/removed packages from above
+zplug clean --force
 ## Then, source plugins and add commands to $PATH
 zplug load #--verbose
 #########################################
@@ -177,7 +177,7 @@ if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
 fi
 # exa - modern ls replacement
 if (( $+commands[exa] )); then
-  alias ls="exa --git"
+  alias ls="exa --color=auto --git --icons --group-directories-first --sort=name --classify --header"
 fi
 #########################################
 
