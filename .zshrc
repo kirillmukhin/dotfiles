@@ -103,6 +103,8 @@ if zplug check zsh-users/zsh-history-substring-search; then
   #default: "bg=red,fg=white,bold"
   export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="bg=default,fg=1,bold"
 fi
+## autosuggestions
+export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 #########################################
 
 
