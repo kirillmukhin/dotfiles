@@ -60,24 +60,38 @@ endif
 
 "----------------------------------------
 "
-set nocompatible 		" Ward off unexpected things from distro. Helpful when sharing this config for a test-ride (vim -u test_vimrc)
-"
-syntax enable				" Enable syntax highlighting
-"
-set encoding=utf-8	" Requirenment for vim-devicons and CoC
-"
-set number					" Display line numbers on the left
-"
+" Ward off unexpected things from distro. Helpful when sharing this config for a test-ride (vim -u test_vimrc)
+set nocompatible
+" Enable syntax highlighting
+syntax enable
+" Requirenment for vim-devicons and CoC
+set encoding=utf-8
+" Display line numbers on the left
+set number
+" Enable use of the mouse (hold Shift when selecting to copy)
 if has('mouse')
-	set mouse=a 			" Enable use of the mouse (hold Shift when selecting to copy)
+	set mouse=a
 endif
-"
-set autoindent			" Copies the indentation from the previous line, when starting a new line
-"
-set smartindent			" Automatically inserts one extra level of indentation in some cases
-"
-set autochdir 			" Set working directory to the current file
-"
+" Copies the indentation from the previous line, when starting a new line
+set autoindent
+" Automatically inserts one extra level of indentation in some cases
+set smartindent
+" Set working directory to the current file
+set autochdir
+" Show whitespace characters
+set list
+" Characters to represent whitespace characters
+set listchars=tab:⭲\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
+" Enable soft-wrapping
+set wrap
+set linebreak
+" Character to display start of wrapped line
+let &showbreak='⤷ '
+" Keep indentation while wrapping text
+set breakindent
+" Ident by an additional 2 characters on wrapped lines, when line >= 40 characters, put 'showbreak' at start of line
+set breakindentopt=shift:0,min:40,sbr
+
 "----------------------------------------
 
 
@@ -124,6 +138,7 @@ call plug#end()
 
 " Theme ---------------------------------
 "
+" Enable true color
 if exists('+termguicolors')
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -131,7 +146,13 @@ if exists('+termguicolors')
 endif
 "
 colorscheme spaceduck
-if platform == "Android" 		"make theme more amoled-friendly
+"" Overrides for the selected colorscheme
+" Whitespace characters color:
+highlight SpecialKey guifg=#20253d
+" Line break symbol color:
+highlight NonText guifg=#20253d
+" Pure black backgrounds on Android (AMOLED-friendly)
+if platform == "Android"
 	set background=dark
 	highlight Normal guibg=black
 	highlight LineNr guibg=black
