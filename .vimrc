@@ -83,7 +83,7 @@ set autochdir
 " Show whitespace characters
 set list
 " Characters to represent whitespace characters
-set listchars=tab:⭲\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
+set listchars=tab:⇥\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
 " Enable soft-wrapping
 set wrap
 set linebreak
