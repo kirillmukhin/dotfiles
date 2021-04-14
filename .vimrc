@@ -68,7 +68,9 @@ syntax enable
 set encoding=utf-8
 " Display line numbers on the left
 set number
-" Enable use of the mouse (hold Shift when selecting to copy)
+" Enable use of the mouse if it's present
+" or if we're on a portable device (presumably with a touchscreen)
+" Hold Shift when selecting with mouse to copy text.
 if has('mouse') || platform=="Android"
 	set mouse=a
 endif
@@ -185,6 +187,7 @@ let g:netrw_winsize = 15
 "
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
+"TODO: check if installed for the first launch
 let g:airline_theme = 'spaceduck'
 "
 " ---------------------------------------
