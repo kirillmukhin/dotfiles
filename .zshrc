@@ -2,7 +2,10 @@
 # zsh (duh).
 #   If zsh wasn't set as defalt shell yet:
 #   chsh -s $(which zsh)
+#   on Anroid with Termux it was just:
+#   chsh -s zsh
 # curl
+# perl
 # git
 # awk
 #   That is not `mawk`. zplug works with `gawk` and `nawk`
