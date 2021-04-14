@@ -69,7 +69,7 @@ set encoding=utf-8
 " Display line numbers on the left
 set number
 " Enable use of the mouse (hold Shift when selecting to copy)
-if has('mouse')
+if has('mouse') || platform=="Android"
 	set mouse=a
 endif
 " Copies the indentation from the previous line, when starting a new line
@@ -79,7 +79,9 @@ set smartindent
 " Set working directory to the current file
 set autochdir
 " Show whitespace characters
-set list
+if platform!="Android"
+	set list
+endif
 " Characters to represent whitespace characters
 set listchars=tab:⭲\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
 " Enable soft-wrapping
@@ -147,10 +149,6 @@ endif
 "
 colorscheme spaceduck
 "" Overrides for the selected colorscheme
-" Whitespace characters color:
-highlight SpecialKey guifg=#20253d
-" Line break symbol color:
-highlight NonText guifg=#20253d
 " Pure black backgrounds on Android (AMOLED-friendly)
 if platform == "Android"
 	set background=dark
@@ -159,6 +157,10 @@ if platform == "Android"
 	highlight EndOfBuffer guibg=black
 	highlight VertSplit guibg=#0f111b guifg=#0f111b
 endif
+" Whitespace characters color:
+highlight SpecialKey guifg=#20253d
+" Line break symbol color:
+highlight NonText guifg=#20253d
 "
 " ---------------------------------------
 
