@@ -81,7 +81,9 @@ set smartindent
 " Set working directory to the current file
 set autochdir
 " Show whitespace characters
-set list
+if platform!="Android"
+	set list
+endif
 " Characters to represent whitespace characters
 set listchars=tab:⇥\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
 " Enable soft-wrapping
