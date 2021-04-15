@@ -57,7 +57,6 @@ endif
 "----------------------------------------
 
 
-
 "----------------------------------------
 "
 " Ward off unexpected things from distro. Helpful when sharing this config for a test-ride (vim -u test_vimrc)
@@ -165,6 +164,19 @@ highlight SpecialKey guifg=#20253d
 highlight NonText guifg=#20253d
 "
 " ---------------------------------------
+
+
+" Highlight trailing whitespaces ------------------
+" Color for highlighting
+highlight ExtraWhitespace ctermbg=172 guibg=#e39400
+" Show trailing whitespace and spaces before a tab:
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$\| \+\ze\t/
+" Make highlighting to show up instantly after entering/leaving Insert mode
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$\| \+\ze\t/
+autocmd BufWinLeave * call clearmatches()
+"----------------------------------------
 
 
 " Netrw file browser --------------------
