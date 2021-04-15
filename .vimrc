@@ -185,9 +185,8 @@ let g:netrw_winsize = 15
 
 " Vim-airline ---------------------------
 "
-let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
-"TODO: check if installed for the first launch
+"TODO: check if installed for the first launch (or use ':silent!'?)
 let g:airline_theme = 'spaceduck'
 "
 " ---------------------------------------
