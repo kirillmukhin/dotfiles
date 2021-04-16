@@ -203,6 +203,8 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 0
 " Width of the file browser window
 let g:netrw_winsize = 15
+" Enable case-insensitive sorting
+let g:netrw_sort_options = "i"
 "
 " ---------------------------------------
 
