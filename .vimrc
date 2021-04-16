@@ -198,6 +198,8 @@ let g:netrw_winsize = 15
 " Vim-airline ---------------------------
 "
 let g:airline_powerline_fonts = 1
+
+let g:airline#extensions#tabline#enabled = 1
 "TODO: check if installed for the first launch (or use ':silent!'?)
 let g:airline_theme = 'spaceduck'
 "
@@ -223,7 +225,7 @@ set nobackup
 set nowritebackup
 "
 " Change to 2 if more space for displaying messages needed.
-set cmdheight=1 
+set cmdheight=1
 "
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
