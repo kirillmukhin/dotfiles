@@ -143,8 +143,6 @@ call plug#begin('~/.vim/plugged') 					" Specify a directory for plugins
 	Plug 'airblade/vim-gitgutter'
 	" Better syntax support: a collection of language packs for Vim
 	Plug 'sheerun/vim-polyglot'
-	" Insert or delete brackets, parens, and quotes in pair.
-	"Plug 'LunarWatcher/auto-pairs', { 'tag': '*' }
 "
 call plug#end()
 "
@@ -214,8 +212,8 @@ let g:netrw_sort_options = "i"
 let g:airline_powerline_fonts = 1
 
 let g:airline#extensions#tabline#enabled = 1
-"TODO: check if installed for the first launch (or use ':silent!'?)
-let g:airline_theme = 'spaceduck'
+" Set colorscheme, 'silent!' should hide error on first launch
+silent! let g:airline_theme = 'spaceduck'
 "
 " ---------------------------------------
 
