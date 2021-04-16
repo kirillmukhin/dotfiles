@@ -59,10 +59,10 @@ endif
 
 "----------------------------------------
 "
-" Ward off unexpected things from distro. Helpful when sharing this config for a test-ride (vim -u test_vimrc)
-set nocompatible
 " Enable syntax highlighting
 syntax enable
+" Ward off unexpected things from distro. Helpful when sharing this config for a test-ride (vim -u test_vimrc)
+set nocompatible
 " Requirenment for vim-devicons and CoC
 set encoding=utf-8
 " Display line numbers on the left
@@ -94,7 +94,19 @@ let &showbreak='⤷ '
 set breakindent
 " Ident by an additional 2 characters on wrapped lines, when line >= 40 characters, put 'showbreak' at start of line
 set breakindentopt=shift:0,min:40,sbr
-
+"
+" Map wrap toggling to the `Shift+w` in NORMAL mode
+function WrapToggle()
+	" Ampersand in fron of 'wrap' tells Vim that we're referring to an option, not a variable.
+	if (&wrap == 1)
+		" Disable wrap (set it to 'nowrap') if it was enabled
+		set wrap!
+	else
+		set wrap
+	endif
+endfunction
+nnoremap <S-w> :call WrapToggle()<CR>
+"
 "----------------------------------------
 
 
