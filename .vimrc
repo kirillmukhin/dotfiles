@@ -3,34 +3,33 @@
 " git (1.8+ recommended) for vim-plug and other plugins
 " nodejs (>= 10.12) for CoC plugin
 " nerd-comatable font (https://github.com/ryanoasis/nerd-fonts) for vim-devicons
-" 	On android (Termux) (re-)place selected font at ~/.termux/font.ttf:
-" 	cd ~/.termux/ && wget -O SourceCodePro.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/SourceCodePro.zip && unzip -j SourceCodePro.zip 'Sauce Code Pro Nerd Font Complete Mono.ttf' && mv 'Sauce Code Pro Nerd Font Complete Mono.ttf' 'font.ttf' && rm SourceCodePro.zip
+"	On android (Termux) (re-)place selected font at ~/.termux/font.ttf:
+"	cd ~/.termux/ && wget -O SourceCodePro.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/SourceCodePro.zip && unzip -j SourceCodePro.zip 'Sauce Code Pro Nerd Font Complete Mono.ttf' && mv 'Sauce Code Pro Nerd Font Complete Mono.ttf' 'font.ttf' && rm SourceCodePro.zip
 "
 "----------------------------------------
 
 " Tips ----------------------------------
 "
 " Vim-Plug:
-" 	Updating plugins:
-" 		1. :PlugUpdate - Install or update plugins
-" 		2. :PlugUpgrade - Update vim-plug itself
-" 	If you want to disable some plugins:
-" 		1. Remove or comment out their Plugs in the Vim-Plug section of this .vimrc
-" 		2. Then reload vimrc (:source ~/.vimrc) or restart Vim.
-" 		3. (Optional) Run :PlugClean to seek and destroy all undeclared plugins from disk.
+"	Updating plugins:
+"		1. :PlugUpdate - Install or update plugins
+"		2. :PlugUpgrade - Update vim-plug itself
+"	If you want to disable some plugins:
+"		1. Remove or comment out their Plugs in the Vim-Plug section of this .vimrc
+"		2. Then reload vimrc (:source ~/.vimrc) or restart Vim.
+"		3. (Optional) Run :PlugClean to seek and destroy all undeclared plugins from disk.
 " CoC plugin:
-" 	List installed extensions:
-" 		:Coclist extensions
-" 			(+) - extension was loaded
-" 			(-) - extension was disabled
-" 			(*) - extension was activated
-" 			(?) - invalid extension
-" 	Updating extensions:
-" 		For manual updates use :CocUpdate
-" 		To enable autoupdate - in :CocConfig set 'coc.preferences.extensionUpdateCheck' to 'daily'
-" 	Uninstalling extensions:
-" 		:CocUninstall coc-css
-"
+"	List installed extensions:
+"		:Coclist extensions
+"			(+) - extension was loaded
+"			(-) - extension was disabled
+"			(*) - extension was activated
+"			(?) - invalid extension
+"	Updating extensions:
+"		For manual updates use :CocUpdate
+"		To enable autoupdate - in :CocConfig set 'coc.preferences.extensionUpdateCheck' to 'daily'
+"	Uninstalling extensions:
+"		:CocUninstall coc-css
 "
 " ---------------------------------------
 
@@ -73,10 +72,6 @@ set number
 if has('mouse') || platform=="Android"
 	set mouse=a
 endif
-" Copies the indentation from the previous line, when starting a new line
-set autoindent
-" Automatically inserts one extra level of indentation in some cases
-set smartindent
 " Set working directory to the current file
 set autochdir
 " Show whitespace characters
@@ -85,8 +80,36 @@ if platform!="Android"
 endif
 " Characters to represent whitespace characters
 set listchars=tab:⇥\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
-" Enable soft-wrapping
+"
+"----------------------------------------
+
+
+" Tabs ----------------------------------
+"
+" Exlicetly disable converting tabs to spaces (default = noexpandtab)
+set noexpandtab
+" (Good idea to keep tabstop, shiftwidth and softtabstop to the same value)
+" Width of the TAB character
+set tabstop=4
+" Affects what happens when you press >>, << or ==. Also affects automatic indentation.
+set shiftwidth=4
+" affects what happens when you press the <TAB> or <BS> keys.
+set softtabstop=4
+" <TAB> in front of a line inserts blanks according to 'shiftwidth'. 'tabstop' or 'softtabstop' is used in other places.
+set smarttab
+" Copy indent from current line when starting a new line
+set autoindent
+" Automatically inserts one extra level of indentation in some cases
+set smartindent
+"
+"----------------------------------------
+
+
+" Wrapping ------------------------------
+"
+" Enable word wrapping
 set wrap
+" Prevent wrapping from breaking words (soft-wrap)
 set linebreak
 " Character to display start of wrapped line
 let &showbreak='⤷ '
@@ -123,7 +146,8 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 "
-call plug#begin('~/.vim/plugged') 					" Specify a directory for plugins
+" Specify the directory for plugins
+call plug#begin('~/.vim/plugged')
 "
 	" Theme
 	Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
@@ -192,8 +216,8 @@ autocmd BufWinLeave * call clearmatches()
 " Netrw file browser --------------------
 "
 " map Netwr toggle to Ctrl+t comibnation
-" 	noremap means non-recursive mapping (stackoverflow.com/questions/3776117/)
-" 	<cr> stands for 'Carrige return', i.e. smae as hitting 'Enter'
+"	noremap means non-recursive mapping (stackoverflow.com/questions/3776117/)
+"	<cr> stands for 'Carrige return', i.e. smae as hitting 'Enter'
 noremap <C-t> :Lexplore<cr>
 " hide that giant ugly help banner
 let g:netrw_banner = 0
