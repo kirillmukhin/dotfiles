@@ -56,7 +56,7 @@ endif
 "----------------------------------------
 
 
-"----------------------------------------
+" General Settings ----------------------
 "
 " Enable syntax highlighting
 syntax enable
@@ -84,9 +84,9 @@ set listchars=tab:⇥\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
 "----------------------------------------
 
 
-" Tabs ----------------------------------
+" Tabs and Indentation ------------------
 "
-" Exlicetly disable converting tabs to spaces (default = noexpandtab)
+" Explicitly disable converting tabs to spaces (default = noexpandtab)
 set noexpandtab
 " (Good idea to keep tabstop, shiftwidth and softtabstop to the same value)
 " Width of the TAB character
