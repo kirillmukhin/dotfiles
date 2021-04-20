@@ -135,19 +135,21 @@ nnoremap <S-w> :call WrapToggle()<CR>
 
 " Highlight word under the cursor --------
 "
+" Highlight all instances of the word that is currently under the cursor
+" https://stackoverflow.com/a/64782689/15153114
+"
 function! HighlightWordUnderCursor()
 	let disabled_ft = ["qf", "fugitive", "nerdtree", "gundo", "diff", "fzf", "floaterm"]
 	if &diff || &buftype == "terminal" || index(disabled_ft, &filetype) >= 0
 		return
 	endif
 	if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
-		hi MatchWord cterm=undercurl gui=undercurl guibg=#1b1c36
+		hi MatchWord cterm=undercurl gui=undercurl guibg=#20253d
 		exec 'match' 'MatchWord' '/\V\<'.expand('<cword>').'\>/'
 	else
 		match none
 	endif
 endfunction
-"
 augroup MatchWord
 	autocmd!
 	autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
@@ -168,7 +170,7 @@ endif
 " Run PlugInstall if there are missing plugins (NOTE: may increase the startup time of Vim.)
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
-\| endif
+\| endiif
 "
 " Specify the directory for plugins
 call plug#begin('~/.vim/plugged')
