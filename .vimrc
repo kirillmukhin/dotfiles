@@ -133,6 +133,30 @@ nnoremap <S-w> :call WrapToggle()<CR>
 "----------------------------------------
 
 
+" Highlight word under the cursor --------
+"
+function! HighlightWordUnderCursor()
+	let disabled_ft = ["qf", "fugitive", "nerdtree", "gundo", "diff", "fzf", "floaterm"]
+	if &diff || &buftype == "terminal" || index(disabled_ft, &filetype) >= 0
+		return
+	endif
+	if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
+		hi MatchWord cterm=undercurl gui=undercurl guibg=#1b1c36
+		exec 'match' 'MatchWord' '/\V\<'.expand('<cword>').'\>/'
+	else
+		match none
+	endif
+endfunction
+"
+augroup MatchWord
+	autocmd!
+	autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
+augroup END
+"
+"-----------------------------------------
+
+
+
 " Vim-Plug ------------------------------
 "
 " Install vim-plug if not found
