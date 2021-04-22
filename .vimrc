@@ -1,4 +1,4 @@
-" PREREQUIREMENTS -----------------------
+" PREREQUIREMENTS ------------------------
 "
 " git (1.8+ recommended) for vim-plug and other plugins
 " nodejs (>= 10.12) for CoC plugin
@@ -6,11 +6,13 @@
 "	On android (Termux) (re-)place selected font at ~/.termux/font.ttf:
 "	cd ~/.termux/ && wget -O SourceCodePro.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/SourceCodePro.zip && unzip -j SourceCodePro.zip 'Sauce Code Pro Nerd Font Complete Mono.ttf' && mv 'Sauce Code Pro Nerd Font Complete Mono.ttf' 'font.ttf' && rm SourceCodePro.zip
 "
-"----------------------------------------
+"-----------------------------------------
 
-" Tips ----------------------------------
+
+" Tips -----------------------------------
 "
 " Vim-Plug:
+"
 "	Updating plugins:
 "		1. :PlugUpdate - Install or update plugins
 "		2. :PlugUpgrade - Update vim-plug itself
@@ -31,14 +33,15 @@
 "	Uninstalling extensions:
 "		:CocUninstall coc-css
 "
-" ---------------------------------------
+" ----------------------------------------
 
 
-" OS detector ---------------------------
+" OS detector ----------------------------
 "
 " Record name of running OS to a variable
 " It may be used later for OS-specific options
 let platform = "unknown"
+
 if has("unix")
 	if has("mac")
 		let platform = "macOS"
@@ -53,17 +56,25 @@ elseif has("win32") || has("win64")
 	let platform = "Windows"
 endif
 "
-"----------------------------------------
+"-----------------------------------------
 
 
-" General Settings ----------------------
+" General Settings -----------------------
 "
-" Enable syntax highlighting
-syntax enable
+" Syntax highlighting ('enable' and 'on' aren't the same)
+syntax on
 " Ward off unexpected things from distro. Helpful when sharing this config for a test-ride (vim -u test_vimrc)
 set nocompatible
 " Requirenment for vim-devicons and CoC
 set encoding=utf-8
+"
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+if platform=="Android"
+	set updatetime=666
+else
+	set updatetime=420
+endif
 " Display line numbers on the left
 set number
 " Enable use of the mouse if it's present
@@ -79,12 +90,13 @@ if platform!="Android"
 	set list
 endif
 " Characters to represent whitespace characters
-set listchars=tab:⇥\ ,trail:-,extends:>,precedes:<,nbsp:+,space:·
+"set listchars=tab:▒\ ,trail:⎵,extends:⏵,precedes:⏴,nbsp:⎵,space:·
+set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:·
 "
-"----------------------------------------
+"-----------------------------------------
 
 
-" Tabs and Indentation ------------------
+" Tabs and Indentation -------------------
 "
 " Explicitly disable converting tabs to spaces (default = noexpandtab)
 set noexpandtab
@@ -94,7 +106,7 @@ set tabstop=4
 " Affects what happens when you press >>, << or ==. Also affects automatic indentation.
 set shiftwidth=4
 " affects what happens when you press the <TAB> or <BS> keys.
-set softtabstop=4
+set softtabstop=0
 " <TAB> in front of a line inserts blanks according to 'shiftwidth'. 'tabstop' or 'softtabstop' is used in other places.
 set smarttab
 " Copy indent from current line when starting a new line
@@ -102,10 +114,10 @@ set autoindent
 " Automatically inserts one extra level of indentation in some cases
 set smartindent
 "
-"----------------------------------------
+"-----------------------------------------
 
 
-" Wrapping ------------------------------
+" Wrapping -------------------------------
 "
 " Enable word wrapping
 set wrap
@@ -130,10 +142,10 @@ function WrapToggle()
 endfunction
 nnoremap <S-w> :call WrapToggle()<CR>
 "
-"----------------------------------------
+"-----------------------------------------
 
 
-" Highlight word under the cursor --------
+" Highlight word under the cursor -------
 "
 " Highlight all instances of the word that is currently under the cursor
 " https://stackoverflow.com/a/64782689/15153114
@@ -151,15 +163,36 @@ function! HighlightWordUnderCursor()
 	endif
 endfunction
 augroup MatchWord
+	" Clear the autocmds of the current group
+	" to prevent them from piling up each time you reload your vimrc.
 	autocmd!
+	" Why use `!` here?
 	autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 augroup END
+"
+"----------------------------------------
+
+
+" Highlight trailing whitespaces ---------
+"
+"
+" Color for highlighting
+highlight default ExtraWhitespace ctermbg=172 guibg=#e39400
+autocmd ColorScheme * highlight default ExtraWhitespace ctermbg=172 guibg=#e39400
+" Show trailing whitespace and spaces before a tab:
+"	(We are using `2match`, beacuse` match` was already taken
+"	by the HighlightWordUnderCursor function)
+2match ExtraWhitespace /\s\+$\| \+\ze\t/
+autocmd BufWinEnter * 2match ExtraWhitespace /\s\+$\| \+\ze\t/
+" Make highlighting to show up instantly after entering/leaving Insert mode
+autocmd InsertEnter * 2match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
+autocmd InsertLeave * 2match ExtraWhitespace /\s\+$\| \+\ze\t/
+autocmd BufWinLeave * call clearmatches()
 "
 "-----------------------------------------
 
 
-
-" Vim-Plug ------------------------------
+" Vim-Plug -------------------------------
 "
 " Install vim-plug if not found
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -196,10 +229,10 @@ call plug#begin('~/.vim/plugged')
 "
 call plug#end()
 "
-"----------------------------------------
+"-----------------------------------------
 
 
-" Theme ---------------------------------
+" Theme ----------------------------------
 "
 " Enable true color
 if exists('+termguicolors')
@@ -223,23 +256,10 @@ highlight SpecialKey guifg=#20253d
 " Line break symbol color:
 highlight NonText guifg=#20253d
 "
-" ---------------------------------------
+" ----------------------------------------
 
 
-" Highlight trailing whitespaces ------------------
-" Color for highlighting
-highlight ExtraWhitespace ctermbg=172 guibg=#e39400
-" Show trailing whitespace and spaces before a tab:
-match ExtraWhitespace /\s\+$\| \+\ze\t/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$\| \+\ze\t/
-" Make highlighting to show up instantly after entering/leaving Insert mode
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$\| \+\ze\t/
-autocmd BufWinLeave * call clearmatches()
-"----------------------------------------
-
-
-" Netrw file browser --------------------
+" Netrw file browser ---------------------
 "
 " map Netwr toggle to Ctrl+t comibnation
 "	noremap means non-recursive mapping (stackoverflow.com/questions/3776117/)
@@ -254,21 +274,21 @@ let g:netrw_winsize = 15
 " Enable case-insensitive sorting
 let g:netrw_sort_options = "i"
 "
-" ---------------------------------------
+" ----------------------------------------
 
 
-" Vim-airline ---------------------------
+" Vim-airline ----------------------------
 "
 let g:airline_powerline_fonts = 1
-
+"
 let g:airline#extensions#tabline#enabled = 1
 " Set colorscheme, 'silent!' should hide error on first launch
 silent! let g:airline_theme = 'spaceduck'
 "
-" ---------------------------------------
+" ----------------------------------------
 
 
-" CoC - Conquer of Completion -----------
+" CoC - Conquer of Completion ------------
 "
 let g:coc_global_extensions = [
 	\'coc-highlight',
@@ -277,7 +297,6 @@ let g:coc_global_extensions = [
 	\'coc-clangd',
 	\'coc-jedi',
 	\]
-
 " TextEdit might fail if hidden is not set.
 set hidden
 "
@@ -288,10 +307,6 @@ set nowritebackup
 "
 " Change to 2 if more space for displaying messages needed.
 set cmdheight=1
-"
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
 "
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -436,4 +451,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-" ---------------------------------------
+" ----------------------------------------
