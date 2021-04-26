@@ -106,7 +106,7 @@ set tabstop=4
 " Affects what happens when you press >>, << or ==. Also affects automatic indentation.
 set shiftwidth=4
 " affects what happens when you press the <TAB> or <BS> keys.
-set softtabstop=0
+set softtabstop=4
 " <TAB> in front of a line inserts blanks according to 'shiftwidth'. 'tabstop' or 'softtabstop' is used in other places.
 set smarttab
 " Copy indent from current line when starting a new line
