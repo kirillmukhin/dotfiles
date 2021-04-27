@@ -44,15 +44,6 @@ fi
 #########################################
 
 
-# KEYCHAIN KEY ##########################
-# ssh-agent manager helps with github authentification
-# If you have a key used on github in ~/.ssh - set its name here
-# Otherwise leave variable's value empty:
-#local github_key_name=""
-local github_key_name="github_ed25519"
-#########################################
-
-
 ### SOURCE ZPLUG ########################
 if [[ -s "$HOME/.zplug/init.zsh" ]]; then
   source $HOME/.zplug/init.zsh
@@ -183,14 +174,5 @@ fi
 # exa - modern ls replacement
 if (( $+commands[exa] )); then
   alias ls="exa --color=auto --git --icons --group-directories-first --sort=name --classify --header"
-fi
-#########################################
-
-
-# KEYCHAIN ##############################
-# Launch ssh-agent with github's key alongside with shell
-# if keyname is set, keychain is installed and private key found in the ~./ssh/ folder
-if [ $github_key_name ] && (( $+commands[keychain] )) && [ ! -f "~/.ssh/$github_key_name" ]; then
-  eval $(keychain --eval --quiet $github_key_name)
 fi
 #########################################
