@@ -9,7 +9,6 @@
 # git
 # awk
 #   That is not `mawk`. zplug works with `gawk` and `nawk`
-# keychain (if you need to manage ssh-agent with it)
 #########################################
 
 
