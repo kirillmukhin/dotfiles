@@ -203,7 +203,7 @@ endif
 " Run PlugInstall if there are missing plugins (NOTE: may increase the startup time of Vim.)
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
-\| endiif
+\| endif
 "
 " Specify the directory for plugins
 call plug#begin('~/.vim/plugged')
