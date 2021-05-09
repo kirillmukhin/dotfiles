@@ -167,7 +167,7 @@ fi
 # NordVPN
 if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
   alias nord_connect="nordvpn connect Estonia -g P2P"
-  alias nord_re="nordvpn disconnect && nordvpn rate 1 && nordvpn connect Estonia -g P2P"
+  alias nord_re="nordvpn disconnect && nordvpn connect Estonia -g P2P"
   alias nord_info="nordvpn status && nordvpn settings && nordvpn account"
 fi
 # exa - modern ls replacement
