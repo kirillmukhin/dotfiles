@@ -40,20 +40,20 @@
 "
 " Record name of running OS to a variable
 " It may be used later for OS-specific options
-let platform = "unknown"
+let s:platform = "unknown"
 
 if has("unix")
 	if has("mac")
-		let platform = "macOS"
+		let s:platform = "macOS"
 	else
 		if substitute(system('uname -o'), "\n", "", "") == "Android"
-			let platform = "Android"
+			let s:platform = "Android"
 		else
-			let platform = "Linux"
+			let s:platform = "Linux"
 		endif
 	endif
 elseif has("win32") || has("win64")
-	let platform = "Windows"
+	let s:platform = "Windows"
 endif
 "
 "-----------------------------------------
@@ -70,23 +70,23 @@ set encoding=utf-8
 "
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-if platform=="Android"
-	set updatetime=666
+if s:platform=="Android"
+	set updatetime=1024
 else
-	set updatetime=420
+	set updatetime=512
 endif
 " Display line numbers on the left
 set number
 " Enable use of the mouse if it's present
 " or if we're on a portable device (presumably with a touchscreen)
 " Hold Shift when selecting with mouse to copy text.
-if has('mouse') || platform=="Android"
+if has('mouse') || s:platform=="Android"
 	set mouse=a
 endif
 " Set working directory to the current file
 set autochdir
 " Show whitespace characters
-if platform!="Android"
+if s:platform!="Android"
 	set list
 endif
 " Characters to represent whitespace characters
@@ -216,11 +216,11 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 	Plug 'vim-airline/vim-airline'
 		" Official theme repository for vim-airline
 		Plug 'vim-airline/vim-airline-themes'
-		if platform != "Android"
+		if s:platform != "Android"
 			" File type icons (freak's out airline on Android)
 			Plug 'ryanoasis/vim-devicons'
 		endif
-	if platform != "Android"
+	if s:platform != "Android"
 		" Markdown preview
 		Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 	endif
@@ -248,7 +248,7 @@ endif
 colorscheme spaceduck
 " Overrides for the selected colorscheme
 "	Pure black backgrounds on Android (AMOLED-friendly)
-if platform == "Android"
+if s:platform == "Android"
 	set background=dark
 	highlight Normal guibg=black
 	highlight LineNr guibg=black
@@ -294,7 +294,7 @@ silent! let g:airline_theme = 'spaceduck'
 
 " Markdown-Preview ----------------------
 "
-if platform != "Android"
+if s:platform != "Android"
 	" Binds
 	"	Toggle markdown preview in the browser with <Ctrl+p>
 	nmap <C-p> <Plug>MarkdownPreviewToggle
