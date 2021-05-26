@@ -277,6 +277,9 @@ let g:netrw_liststyle = 0
 let g:netrw_winsize = 15
 " Enable case-insensitive sorting
 let g:netrw_sort_options = "i"
+" Sort files with no regard to it's extension
+let g:netrw_sort_sequence = '[\/]$,\<core\%(\.\d\+\)\=\>,\*,\~$'
+"let g:netrw_sort_sequence = '[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$' " Default value
 "
 " ----------------------------------------
 
