@@ -166,10 +166,10 @@ if (( $+commands[valgrind] )); then
 fi
 # NordVPN
 if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
-  alias nord_connect="nordvpn connect Estonia -g P2P"
-  alias nord_re="nordvpn disconnect && nordvpn connect Estonia -g P2P"
+  alias nord_connect="nordvpn connect Estonia"
+  alias nord_re="nordvpn disconnect && nordvpn connect Estonia"
   alias nord_info="nordvpn status && nordvpn settings && nordvpn account"
-alias nord_unfuck="sudo -- sh -c 'systemctl restart nordvpnd.socket; sleep 2; systemctl restart NetworkManager.service' && sleep 2 && nordvpn connect Estonia -g P2P"
+  alias nord_unfuck="sudo -- sh -c 'systemctl restart nordvpnd.socket; sleep 2; systemctl restart NetworkManager.service' && sleep 2 && nordvpn connect Estonia && sleep 2 && nordvpn rate 1"
 #  alias nord_unfuck="sudo systemctl restart nordvpnd.service && sleep 5 && nordvpn rate 1 && nordvpn connect Estonia -g P2P"
 fi
 # exa - modern ls replacement
