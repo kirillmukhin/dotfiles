@@ -141,9 +141,13 @@ man() {
 
 
 ### VIM #################################
-if which vim &>/dev/null; then
-# Open vim as defualt editor (e.g. during `git commit`)
-  export VISUAL=vim
+if (( $+commands[nvim] )); then
+  alias vim='nvim'
+  # Open nvim as defualt editor (e.g. during `git commit`)
+  export VISUAL=nvim
+  export EDITOR="$VISUAL"
+elif (( $+commands[vim] )); then
+  export VISUAL='vim'
   export EDITOR="$VISUAL"
 fi
 #########################################
@@ -166,11 +170,12 @@ if (( $+commands[valgrind] )); then
 fi
 # NordVPN
 if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
-  alias nord_connect="nordvpn connect Estonia"
-  alias nord_re="nordvpn disconnect && nordvpn connect Estonia"
+  alias nord_connect="~/.autostart/nordvpn_connect.sh"
+  alias nord_disconnect="~/.autostart/nordvpn_disconnect.sh"
+  alias nord_killswitch_toggle="if grep -q 'Kill Switch: enabled' <(nordvpn settings); then nordvpn set killswitch off; else nordvpn set killswitch on; fi"
+  alias nord_re="nordvpn disconnect && ~/.autostart/nordvpn_connect.sh"
   alias nord_info="nordvpn status && nordvpn settings && nordvpn account"
-  alias nord_unfuck="sudo -- sh -c 'systemctl restart nordvpnd.socket; sleep 2; systemctl restart NetworkManager.service' && sleep 2 && nordvpn connect Estonia && sleep 2 && nordvpn rate 1"
-#  alias nord_unfuck="sudo systemctl restart nordvpnd.service && sleep 5 && nordvpn rate 1 && nordvpn connect Estonia -g P2P"
+  #alias nord_unfuck="sudo -- sh -c 'systemctl restart nordvpnd.socket; sleep 2; systemctl restart NetworkManager.service' && sleep 2 && nordvpn connect Estonia && sleep 2 && nordvpn rate 1"
 fi
 # exa - modern ls replacement
 if (( $+commands[exa] )); then
