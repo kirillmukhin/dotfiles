@@ -11,6 +11,10 @@
 #   That is not `mawk`. zplug works with `gawk` and `nawk`
 #########################################
 
+## UPDATING #############################
+# Zplug
+#   run 'zplug update'
+#########################################
 
 ### UNINSTALL ###########################
 # Remove plugins installed with zplug:
