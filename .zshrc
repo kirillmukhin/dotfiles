@@ -157,7 +157,7 @@ fi
 #########################################
 
 
-# Aliases ###############################
+# Aliases and Functions #################
 if (( $+commands[xdg-open] )); then
   alias open=xdg-open
 fi
@@ -172,6 +172,16 @@ fi
 if (( $+commands[valgrind] )); then
   alias valeaks='valgrind --tool=memcheck --leak-check=full --track-origins=yes'
 fi
+# exa - modern ls replacement
+if (( $+commands[exa] )); then
+  alias ls="exa --color=auto --git --icons --group-directories-first --sort=name --classify --header"
+fi
+# testcomp - compile, run and cleanup in a single command
+if (( $+commands[gcc] )); then
+  function testcomp() {
+    gcc $@ -o testcomp && ./testcomp && rm testcomp
+  }
+fi
 # NordVPN
 if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
   alias nord_connect="~/.autostart/nordvpn_connect.sh"
@@ -180,9 +190,5 @@ if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
   alias nord_re="nordvpn disconnect && ~/.autostart/nordvpn_connect.sh"
   alias nord_info="nordvpn status && nordvpn settings && nordvpn account"
   #alias nord_unfuck="sudo -- sh -c 'systemctl restart nordvpnd.socket; sleep 2; systemctl restart NetworkManager.service' && sleep 2 && nordvpn connect Estonia && sleep 2 && nordvpn rate 1"
-fi
-# exa - modern ls replacement
-if (( $+commands[exa] )); then
-  alias ls="exa --color=auto --git --icons --group-directories-first --sort=name --classify --header"
 fi
 #########################################
