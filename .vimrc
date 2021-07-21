@@ -191,6 +191,18 @@ autocmd BufWinLeave * call clearmatches()
 "-----------------------------------------
 
 
+" Vim-Polyglot ---------------------------
+"
+" Polyglot pack's settings should be declared BEFORE
+" polyglot itself is loaded (i.e. before Vim-Plug part).
+"
+" autoindent doesn't let me use tabs somwtimes
+" (specificly in the markdown files)
+let g:polyglot_disabled = ['autoindent']
+"
+"-----------------------------------------
+
+
 " Vim-Plug -------------------------------
 "
 " Install vim-plug if not found
