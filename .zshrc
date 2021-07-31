@@ -146,6 +146,9 @@ man() {
 
 ### VIM #################################
 if (( $+commands[nvim] )); then
+  if (( $+commands[vim] )); then
+    alias paleovim='vim'
+  fi
   alias vim='nvim'
   # Open nvim as defualt editor (e.g. during `git commit`)
   export VISUAL=nvim
