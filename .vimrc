@@ -96,6 +96,41 @@ set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:·
 "-----------------------------------------
 
 
+" Shortcuts ------------------------------
+"
+" :map <key> will list anyexisting mappingsfor <key>.
+"
+" Clipboard
+	" if vim was compiled with clipboard support:
+if has("clipboard")
+	" remap y and p to copy/past between vim instances
+	noremap y "*y<CR>
+	noremap p "*p<CR>
+	" remap Y and P to copy/past to system clipboard
+	noremap Y "+y<CR>
+	noremap P "+p<CR>
+endif
+"
+" Buffer switching
+" (In analogy with switching tabs, using 'gt' and 'gT'):
+"	Go to the next buffer in buffer list
+noremap bt :bnext<CR>
+"	Go to the previous buffer in buffer list
+noremap bT :bprevious<CR>
+"	Go to the specific buffer:
+noremap b1 :b1<CR>
+noremap b2 :b2<CR>
+noremap b3 :b3<CR>
+noremap b4 :b4<CR>
+noremap b5 :b5<CR>
+noremap b6 :b6<CR>
+noremap b7 :b7<CR>
+noremap b8 :b8<CR>
+noremap b9 :b9<CR>
+"
+" ----------------------------------------
+
+
 " Tabs and Indentation -------------------
 "
 " Explicitly disable converting tabs to spaces (default = noexpandtab)
