@@ -134,13 +134,13 @@ noremap b9 :b9<CR>
 "
 " Explicitly disable converting tabs to spaces (default = noexpandtab)
 set noexpandtab
-" (Good idea to keep tabstop, shiftwidth and softtabstop to the same value)
 " Width of the TAB character
 set tabstop=4
 " Affects what happens when you press >>, << or ==. Also affects automatic indentation.
 set shiftwidth=4
 " affects what happens when you press the <TAB> or <BS> keys.
 set softtabstop=4
+" (Good idea to keep tabstop, shiftwidth and softtabstop to the same value)
 " <TAB> in front of a line inserts blanks according to 'shiftwidth'. 'tabstop' or 'softtabstop' is used in other places.
 set smarttab
 " Copy indent from current line when starting a new line
@@ -469,15 +469,6 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 " (vim>=8.1.1564 can merge signcolumn and number column into one with value 'number')
 set signcolumn=yes
-"
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "
 function! s:check_back_space() abort
   let col = col('.') - 1
