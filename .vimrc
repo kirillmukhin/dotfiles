@@ -306,6 +306,12 @@ highlight SpecialKey guifg=#20253d
 " Line break symbol color:
 highlight NonText guifg=#20253d
 "
+" Fix for unreadable text on inactive tabs:
+"	https://github.com/pineapplegiant/spaceduck/issues/43
+let s:inactive1 = [ "#30365F", "#16172d", 234, 234 ]
+let s:inactive2 = [ "#30365F", "#16172d", 234, 234 ]
+let s:inactive3 = [ "#30365F", "#16172d", 234, 234 ]
+"
 " ----------------------------------------
 
 
