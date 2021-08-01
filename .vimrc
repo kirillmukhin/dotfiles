@@ -86,12 +86,14 @@ endif
 " Set working directory to the current file
 set autochdir
 " Show whitespace characters
-if s:platform!="Android"
-	set list
-endif
+set list
 " Characters to represent whitespace characters
-"set listchars=tab:▒\ ,trail:⎵,extends:⏵,precedes:⏴,nbsp:⎵,space:·
-set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:·
+"set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:·
+if s:platform=="Android"
+	set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵
+else
+	set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:◦
+endif
 "
 "-----------------------------------------
 
@@ -103,12 +105,9 @@ set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:·
 " Clipboard
 	" if vim was compiled with clipboard support:
 if has("clipboard")
-	" remap y and p to copy/past between vim instances
-	noremap y "*y<CR>
-	noremap p "*p<CR>
 	" remap Y and P to copy/past to system clipboard
-	noremap Y "+y<CR>
-	noremap P "+p<CR>
+	noremap <C-y> "+y<CR>
+	noremap <C-p> "+p<CR>
 endif
 "
 " Buffer switching
