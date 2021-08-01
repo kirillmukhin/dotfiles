@@ -88,11 +88,11 @@ set autochdir
 " Show whitespace characters
 set list
 " Characters to represent whitespace characters
-"set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:·
+"set listchars=tab:░\ ,trail:-,extends:❯,precedes:❮,nbsp:⎵,space:·
 if s:platform=="Android"
-	set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵
+	set listchars=tab:░\ ,trail:-,extends:❯,precedes:❮,nbsp:⎵
 else
-	set listchars=tab:░\ ,trail:-,extends:⏵,precedes:⏴,nbsp:⎵,space:◦
+	set listchars=tab:░\ ,trail:-,extends:❯,precedes:❮,nbsp:⎵,space:◦
 endif
 "
 "-----------------------------------------
