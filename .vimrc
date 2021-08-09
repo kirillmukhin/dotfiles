@@ -83,8 +83,6 @@ set number
 if has('mouse') || s:platform=="Android"
 	set mouse=a
 endif
-" Set working directory to the current file
-set autochdir
 " Show whitespace characters
 set list
 " Characters to represent whitespace characters
@@ -331,7 +329,6 @@ let g:netrw_winsize = 15
 let g:netrw_sort_options = "i"
 " Sort files with no regard to it's extension
 let g:netrw_sort_sequence = '[\/]$,\<core\%(\.\d\+\)\=\>,\*,\~$'
-"let g:netrw_sort_sequence = '[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$' " Default value
 "
 " ----------------------------------------
 
