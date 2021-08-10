@@ -103,9 +103,9 @@ endif
 " Clipboard
 	" if vim was compiled with clipboard support:
 if has("clipboard")
-	" remap Y and P to copy/past to system clipboard
-	noremap Y "+y<CR>
-	noremap P "+p<CR>
+	" remap 'y' and 'p' to copy/past to system clipboard
+	noremap y "+y<CR>
+	noremap p "+p<CR>
 endif
 "
 " Buffer switching
