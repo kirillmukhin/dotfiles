@@ -98,14 +98,14 @@ endif
 
 " Shortcuts ------------------------------
 "
-" :map <key> will list anyexisting mappingsfor <key>.
+" :map <key> will list anyexisting mappings for <key>.
 "
 " Clipboard
 	" if vim was compiled with clipboard support:
 if has("clipboard")
 	" remap Y and P to copy/past to system clipboard
-	noremap <C-y> "+y<CR>
-	noremap <C-p> "+p<CR>
+	noremap Y "+y<CR>
+	noremap P "+p<CR>
 endif
 "
 " Buffer switching
