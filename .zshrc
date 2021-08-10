@@ -179,11 +179,21 @@ fi
 if (( $+commands[exa] )); then
   alias ls="exa --color=auto --git --icons --group-directories-first --sort=name --classify --header"
 fi
-# testcomp - compile, run and cleanup in a single command
+# testcompile - compile, run and cleanup in a single command
 if (( $+commands[gcc] )); then
-  function testcomp() {
-    gcc $@ -o testcomp && ./testcomp && rm testcomp
+  function testcompile() {
+	local testname='testcomp'
+	if [[ -e $testname ]]; then # if file with that name already exist
+		local i=0
+		while [[ -e $testname\_$i ]]; do
+			((i++))
+		done
+		testname=$testname\_$i # add a suffix with number that hasn't been taken yet by another file
+	fi
+	gcc $@ -o $testname && ./$testname && rm $testname
   }
+  # shorter alias for the function
+  alias tcom='testcompile'
 fi
 # NordVPN
 if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
