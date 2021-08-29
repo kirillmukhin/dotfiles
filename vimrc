@@ -8,6 +8,17 @@
 "
 "-----------------------------------------
 
+" INSTALLATION -----------------------------
+"
+" For vim:
+"	Create symbolic link to this file in your home dir.
+"	(Assuming you are located inside the folder with current file):
+"		ln -s vimrc $HOME/.vimrc
+"
+" For nvim:
+"	ln -s vimrc $HOME/.config/nvim/init.vim
+"
+" ----------------------------------------
 
 " Tips -----------------------------------
 "

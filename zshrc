@@ -11,6 +11,12 @@
 #   That is not `mawk`. zplug works with `gawk` and `nawk`
 #########################################
 
+## INSTALLATION ##########################
+# Place symbolic link to this file in the home dir:
+#	ln -s zshrc $HOME/.zshrc
+# (Above assumes that you are located inside of the directory with this file)
+#########################################
+
 ## UPDATING #############################
 # Zplug
 #   run 'zplug update'
