@@ -26,6 +26,16 @@ check_command()
 		echo "[!] Checking: vim"
 		cfg=$cfg_vim
 		src=$src_vim
+		echo "cfg: $cfg"
+		echo "if [[ -f '$cfg' ]]"
+		if [[ (-f $cfg) || (-L $cfg) ]]; then
+			echo "[+] cfg exists"
+			if [[ -L $cfg ]]; then
+				echo "-L"
+			fi
+		else
+			echo "[-] cfg does not exist"
+		fi
 	elif [[ "$command" == "nvim" ]]; then
 		echo "[!] Checking: nvim"
 		cfg=$cfg_nvim
@@ -120,7 +130,7 @@ check_existing_config()
 	echo "--    Checking the existing configuration    --"
 	echo "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --"
 	echo ""
-	if [[ -f $cfg ]]; then
+	if [[ (-f $cfg) || (-L $cfg) ]]; then
 		echo "[✔] ($cfg) is already present"
 		if cmp -s $cfg $src; then
 			echo "[✔] ($cfg) contents is the same as in our source file ($src)"
@@ -161,7 +171,7 @@ create_symlink()
 	echo "-- -- -- -- -- -- -- -- -- --"
 	echo ""
 	echo "[✔] [$src] found, ready to create symlink."
-	if [[ -f $cfg ]]; then
+	if [[ (-f $cfg) || (-L $cfg) ]]; then
 		ln -sf $src $cfg # force to override existing symlink if it's present
 	else
 		ln -s $src $cfg
