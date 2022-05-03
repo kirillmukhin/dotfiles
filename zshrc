@@ -201,13 +201,4 @@ if (( $+commands[gcc] )); then
   # shorter alias for the function
   alias tcom='testcompile'
 fi
-# NordVPN
-if (( $+commands[nordvpn] )); then  # If nordvpn-cli is installed
-  alias nord_connect="~/.autostart/nordvpn_connect.sh"
-  alias nord_disconnect="~/.autostart/nordvpn_disconnect.sh"
-  alias nord_killswitch_toggle="if grep -q 'Kill Switch: enabled' <(nordvpn settings); then nordvpn set killswitch off; else nordvpn set killswitch on; fi"
-  alias nord_re="nordvpn disconnect && ~/.autostart/nordvpn_connect.sh"
-  alias nord_info="nordvpn status && nordvpn settings && nordvpn account"
-  #alias nord_unfuck="sudo -- sh -c 'systemctl restart nordvpnd.socket; sleep 2; systemctl restart NetworkManager.service' && sleep 2 && nordvpn connect Estonia && sleep 2 && nordvpn rate 1"
-fi
 #########################################
