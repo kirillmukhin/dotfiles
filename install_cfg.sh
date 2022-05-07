@@ -130,7 +130,7 @@ check_existing_config()
 	echo "--    Checking the existing configuration    --"
 	echo "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --"
 	echo ""
-	if [[ (-f $cfg) || (-L $cfg) ]]; then
+	if [[ (-f $cfg) || (-L $cfg) ]]; then #check if file exists and is a regular file '-f' or a symbolic link (-L)
 		echo "[✔] ($cfg) is already present"
 		if cmp -s $cfg $src; then
 			echo "[✔] ($cfg) contents is the same as in our source file ($src)"
@@ -155,6 +155,7 @@ check_existing_config()
 	else
 		echo "[✖] ($cfg) is NOT present!"
 		echo "[!] Proceesing to create one..."
+		touch $cfg
 	fi
 
 	return 0
@@ -176,8 +177,11 @@ create_symlink()
 	else
 		ln -s $src $cfg
 	fi
-	echo "[✔] ($cfg) symlink was successfully created!"
-
+	if [[ (-L $cfg) ]]; then # if file exists and a symlink
+		echo "[✔] ($cfg) symlink was successfully created!"
+	else
+		echo "[✖] ($cfg) failed to create a symlink!"
+	fi
 }
 
 
