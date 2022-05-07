@@ -133,9 +133,9 @@ create_backup()
 
 check_existing_config()
 {
-	#local src="$1"
-	#local cfg="$2"
-	#local cdf_dir="$3"
+	local src="$1"
+	local cfg="$2"
+	local cdf_dir="$3"
 	local backup_name=""
 
 	echo ""
@@ -175,8 +175,8 @@ check_existing_config()
 
 create_symlink()
 {
-	#local src="$1"
-	#local cfg="$2"
+	local src="$1"
+	local cfg="$2"
 
 	echo ""
 	echo "-- -- -- -- -- -- -- -- -- --"
