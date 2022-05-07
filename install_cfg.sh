@@ -2,14 +2,22 @@
 
 
 backup_dir="$PWD/backup"
-cfg_vim="$HOME/.vimrc"
+cfg_dir_vim="$HOME/"
+cfg_vim="$cfg_nvim_dir/.vimrc"
 src_vim="$PWD/vimrc"
-cfg_nvim="$HOME/.config/nvim/init.vim"
+cfg_dir_nvim="$HOME/.config/nvim/"
+cfg_nvim="$cfg_nvim_dir/init.vim"
 src_nvim="$PWD/vimrc"
-cfg_p10k="$HOME/.p10k.zsh"
+cfg_dir_p10k="$HOME"
+cfg_p10k="$cfg_p10k_dir/.p10k.zsh"
 src_p10k="$PWD/p10k.zsh"
-cfg_zshrc="$HOME/.zshrc"
+cfg_dir_zshrc="$HOME"
+cfg_zshrc="$cfg_zshrc_dir/.zshrc"
 src_zshrc="$PWD/zshrc"
+
+cfg_dir=""
+cfg=""
+src=""
 
 check_command()
 {
@@ -24,6 +32,7 @@ check_command()
 
 	if [[ "$command" == "vim" ]]; then
 		echo "[!] Checking: vim"
+		cfg_dir=$cfg_dir_vim
 		cfg=$cfg_vim
 		src=$src_vim
 		echo "cfg: $cfg"
@@ -38,11 +47,13 @@ check_command()
 		fi
 	elif [[ "$command" == "nvim" ]]; then
 		echo "[!] Checking: nvim"
+		cfg_dir=$cfg_dir_nvim
 		cfg=$cfg_nvim
 		src=$src_nvim
 	elif [[ "$command" == "p10k" ]]; then
 		if [[ -x "$(command -v vim)" ]] || [[ -x "$(command -v nvim)" ]]; then
 			echo "[!] Checking: p10k"
+			cfg_dir=$cfg_dir_p10k
 			cfg=$cfg_p10k
 			src=$src_p10k
 			return 0
@@ -52,6 +63,7 @@ check_command()
 		fi
 	elif [[ "$command" == "zsh" ]]; then
 		echo "[!] Checking: zsh"
+		cfg_dir=$cfg_dir_zshrc
 		cfg=$cfg_zshrc
 		src=$src_zshrc
 	else
@@ -121,8 +133,9 @@ create_backup()
 
 check_existing_config()
 {
-	local src="$1"
-	local cfg="$2"
+	#local src="$1"
+	#local cfg="$2"
+	#local cdf_dir="$3"
 	local backup_name=""
 
 	echo ""
@@ -149,12 +162,11 @@ check_existing_config()
 		else
 			echo "[✖] ($cfg) contents differs from the source file ($src)!"
 		fi
-
 		create_backup "$src" "$cfg"
-
 	else
 		echo "[✖] ($cfg) is NOT present!"
 		echo "[!] Proceesing to create one..."
+		mkdir $cfg_dir
 		touch $cfg
 	fi
 
@@ -163,8 +175,8 @@ check_existing_config()
 
 create_symlink()
 {
-	local src="$1"
-	local cfg="$2"
+	#local src="$1"
+	#local cfg="$2"
 
 	echo ""
 	echo "-- -- -- -- -- -- -- -- -- --"
@@ -198,7 +210,7 @@ run_installation()
 	if [[ $? -eq 0 ]]; then
 		check_source "$src"
 		if [[ $? -eq 0 ]]; then
-			check_existing_config "$src" "$cfg"
+			check_existing_config "$src" "$cfg" "$cfg_dir"
 			if [[ $? -eq 0 ]]; then
 				create_symlink "$src" "$cfg"
 			fi
