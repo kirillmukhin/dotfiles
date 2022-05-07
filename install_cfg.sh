@@ -116,7 +116,7 @@ create_backup()
 	echo "[!] Backing up ($cfg)"
 	if [[ ! -d $backup_dir ]]; then
 		echo "[!] Folder ($backup_dir) not found, creating now..."
-		mkdir --parents $backup_dir # Make parent directories as needed
+		mkdir $backup_dir
 	elif [[ -f $backup_dir/$backup_name ]]; then
 		echo "[!] Backup file [$backup_name] already exists."
 		backup_suffix=1
@@ -166,7 +166,7 @@ check_existing_config()
 	else
 		echo "[✖] ($cfg) is NOT present!"
 		echo "[!] Proceesing to create one..."
-		mkdir $cfg_dir
+		mkdir --parents $cfg_dir # Make parent directories as needed
 		touch $cfg
 	fi
 
