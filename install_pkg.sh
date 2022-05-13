@@ -68,7 +68,7 @@ find_pkgman()
 			update_cmd='pkg upgrade'
 			install_cmd='pkg install'
 		else
-			echo "[ERRPR] pkg command was not found"
+			echo "[ERROR] pkg command was not found"
 			manual_packagemanager
 		fi
 	#elif osver="FreeBSD"; then
@@ -100,11 +100,13 @@ find_pkgman
 if [ "$install_cmd" != "NULL" ]; then
 	install_check "nvim"
 	install_check "zsh"
+	install_check "man"
 	install_check "curl"
 	install_check "perl"
 	install_check "git"
 	install_check "gawk" # alternatively - `nawk`, `mawk` - is a no-no.
-	isntall_check "openssh"
+	install_check "openssh"
+	install_check "nodejs" # for coc
 fi
 
 
@@ -122,11 +124,11 @@ else
 fi
 
 
-search="pacman -Ss"
-pack="vimivedie"
-echo "test search: $search $pack"
-if [[ $($search $pack) ]]; then
-	echo "found $pack"
-else
-	echo "not found $pack"
-fi
+#search="pacman -Ss"
+#pack="vimivedie"
+#echo "test search: $search $pack"
+#if [[ $($search $pack) ]]; then
+#	echo "found $pack"
+#else
+#	echo "not found $pack"
+#fi
