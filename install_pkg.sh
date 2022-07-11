@@ -107,6 +107,8 @@ if [ "$install_cmd" != "NULL" ]; then
 	install_check "gawk" # alternatively - `nawk`, `mawk` - is a no-no.
 	install_check "openssh"
 	install_check "nodejs" # for coc
+	install_check "bat"
+	install_check "exa"
 fi
 
 
